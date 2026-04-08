@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools", "cython"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crmflx"
+authors = [
+    {name = "William Aaron", email = "william.aaron@cfa.harvard.edu"},
+]
+description = "Test Package"
+readme = "README.md"
+version = "0.0.1"
+requires-python = ">=3.8"
+dependencies = [
+    "importlib"
+]
+
+[tool.setuptools]
+ext-modules = [
+    {name = "crmflx.main", sources = ["src/crmflx/main.py"]}
+]
+include-package-data = true
+# Default behavior when using pyproject.toml to configure build.
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true
+# Default behavior when using pyproject.toml to configure build.
+
+[tool.setuptools.package-data]
+"crmflx._model_data" = ["*.asc"]
