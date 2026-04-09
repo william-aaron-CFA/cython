@@ -1,3 +1,6 @@
+# pyproject.toml takes precedence over setup.py for defining the build system and project metadata.
+# setup.py should only be relied on for special scripting behavior, such as building C extensions
+
 [build-system]
 requires = ["setuptools", "cython"]
 build-backend = "setuptools.build_meta"
@@ -16,16 +19,10 @@ dependencies = [
 ]
 
 [tool.setuptools]
-ext-modules = [
-    {name = "crmflx.main", sources = ["src/crmflx/main.py"]}
-]
+# Default behavior when using pyproject.toml to configure build
+# include-package-data = true
+# packages.find.namespaces = true
+
 include-package-data = true
-# Default behavior when using pyproject.toml to configure build.
-
-[tool.setuptools.packages.find]
-where = ["src"]
-namespaces = true
-# Default behavior when using pyproject.toml to configure build.
-
-[tool.setuptools.package-data]
-"crmflx._model_data" = ["*.asc"]
+package-data = {"crmflx._model_data" = ["*.asc"] }
+packages.find = {where = ["src"], namespaces = true}
